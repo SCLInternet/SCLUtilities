@@ -1,0 +1,15 @@
+{
+    "name": "scl/utilities",
+    "description" : "none of your business",
+    "license": "open",
+    "require-dev": {
+        "squizlabs/php_codesniffer": "1.*",
+        "phpspec/phpspec": "2.*@dev",
+        "behat/behat": "3.0.*"
+    },
+    "autoload": {
+        "psr-0": {
+            "SCL\\": "src/"
+        }
+    }
+}
