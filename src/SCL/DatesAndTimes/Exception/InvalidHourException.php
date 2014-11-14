@@ -1,6 +1,8 @@
 <?php
 namespace SCL\DatesAndTimes\Exception;
 
+use SCL\Exception\ExceptionFactory;
+
 class InvalidHourException extends \LogicException
 {
     use ExceptionFactory;

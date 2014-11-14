@@ -25,7 +25,8 @@
     "require-dev": {
         "squizlabs/php_codesniffer": "1.*",
         "phpspec/phpspec": "2.*@dev",
-        "behat/behat": "3.0.*"
+        "behat/behat": "3.0.*",
+        "robteifi/differencer": "dev-master"
     },
     "autoload": {
         "psr-0": {
