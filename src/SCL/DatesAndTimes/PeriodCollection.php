@@ -8,7 +8,10 @@ class PeriodCollection
 {
     /** @var Period[] */
     private $periods = [];
+
+    /** @var string */
     private $baseType;
+
     /** @var Period */
     private $first;
 
@@ -50,7 +53,6 @@ class PeriodCollection
     {
         $currentPeriod = $period;
         $result        = new self();
-//        $this->resolveOverlaps();
         foreach ($this->periods as $aPeriod) {
             $currentPeriod = $this->splitByPeriod($currentPeriod, $aPeriod, $result);
         }
