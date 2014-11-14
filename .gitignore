@@ -2,6 +2,6 @@ vendor
 .buildpath
 .project
 .settings
-.idea
+.idea2
 composer.lock
 composer.phar
