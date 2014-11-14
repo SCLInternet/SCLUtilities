@@ -63,4 +63,32 @@ class Time
         $time = \DateTimeImmutable::createFromFormat('H:i:s', $this->__toString());
         return $time->format($format);
     }
+
+    public function isEqualTo(Time $time)
+    {
+        return (
+            $this->getHour() == $time->getHour() &&
+            $this->getMinute() == $time->getMinute() &&
+            $this->getSecond() == $time->getSecond()
+        );
+    }
+
+    public function isLaterThan(Time $time)
+    {
+        if ($this->getHour() > $time->getHour()) return true;
+        if ($this->getHour() < $time->getHour()) return false;
+
+        if ($this->getMinute() > $time->getMinute()) return true;
+        if ($this->getMinute() < $time->getMinute()) return false;
+
+        if ($this->getSecond() > $time->getSecond()) return true;
+        if ($this->getSecond() < $time->getSecond()) return false;
+
+        return false;
+    }
+
+    public function isEarlierThan(Time $time)
+    {
+        return (! $this->isLaterThan($time) && ! $this->isEqualTo($time));
+    }
 }
