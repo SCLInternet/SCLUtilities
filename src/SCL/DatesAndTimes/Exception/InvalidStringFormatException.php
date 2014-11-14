@@ -2,6 +2,8 @@
 
 namespace SCL\DatesAndTimes\Exception;
 
+use SCL\Exception\ExceptionFactory;
+
 class InvalidStringFormatException extends \LogicException
 {
     use ExceptionFactory;

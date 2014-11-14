@@ -2,6 +2,8 @@
 
 namespace SCL\DatesAndTimes\Exception;
 
+use SCL\Exception\ExceptionFactory;
+
 class OutOfRangeException extends \OutOfRangeException
 {
     use ExceptionFactory;

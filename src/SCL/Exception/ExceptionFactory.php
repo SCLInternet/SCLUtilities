@@ -1,6 +1,6 @@
 <?php
 
-namespace SCL\DatesAndTimes\Exception;
+namespace SCL\Exception;
 
 trait ExceptionFactory
 {
