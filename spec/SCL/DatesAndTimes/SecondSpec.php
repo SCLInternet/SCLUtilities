@@ -16,6 +16,6 @@ class SecondSpec extends ObjectBehavior
     public function it_has_a_valid_value()
     {
         $this->beConstructedWith(30);
-        $this->getValue()->shouldReturn(0);
+        $this->getValue()->shouldReturn(30);
     }
 }

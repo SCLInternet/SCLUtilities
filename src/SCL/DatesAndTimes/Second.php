@@ -14,7 +14,7 @@ class Second
         if ($second > 59) {
             throw InvalidSecondException::secondOutOfRange($second);
         }
-        $this->second = 0;
+        $this->second = (int) $second;
     }
 
     public function getValue()

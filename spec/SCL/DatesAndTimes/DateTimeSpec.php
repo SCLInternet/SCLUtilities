@@ -37,7 +37,7 @@ class DateTimeSpec extends ObjectBehavior
     {
         $this->beConstructedThrough('fromString', ['2014-02-14 11:30:40']);
 
-        $this->__toString()->shouldReturn('2014-02-14 11:30:00');
+        $this->__toString()->shouldReturn('2014-02-14 11:30:40');
     }
 
     public function it_throws_if_invalid_string()
