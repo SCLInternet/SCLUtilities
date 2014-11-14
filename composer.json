@@ -1,7 +1,27 @@
 {
     "name": "scl/utilities",
-    "description" : "none of your business",
-    "license": "open",
+    "description" : "Handy classes, e.g. dates, times etc.",
+    "type" : "library",
+    "license": "MIT",
+    "version": "1.0.0",
+    "authors": [
+        {
+            "name": "Rob Heyes",
+            "email": "rob@scl.co.uk",
+            "homepage": "http://github.com/robteifi"
+        },
+        {
+            "name": "Felix O'Connor",
+            "email": "felix@scl.co.uk"
+        },
+        {
+            "name": "Tom Oram",
+            "email": "tom@scl.co.uk"
+        }
+    ],
+    "require": {
+        "php": ">=5.5.0"
+    },
     "require-dev": {
         "squizlabs/php_codesniffer": "1.*",
         "phpspec/phpspec": "2.*@dev",
