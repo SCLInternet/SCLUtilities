@@ -1,6 +1,8 @@
 <?php
 namespace SCL\DatesAndTimes\Exception;
 
+use SCL\Exception\ExceptionFactory;
+
 class InvalidSecondException extends \LogicException
 {
     use ExceptionFactory;

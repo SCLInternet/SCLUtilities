@@ -1,6 +1,8 @@
 <?php
 namespace SCL\DatesAndTimes\Exception;
 
+use SCL\Exception\ExceptionFactory;
+
 class InvalidDayException extends \LogicException
 {
     use ExceptionFactory;
