@@ -12,13 +12,13 @@ class DaySpec extends ObjectBehavior
     const MONDAY = 'monday';
     const BADDAY = 'badday';
 
-    function let()
-    {
-        $this->beConstructedWith(self::MONDAY);
-    }
+    const SUNDAY = 'sunday';
+
+    const SATURDAY = 'saturday';
 
     function it_is_initializable()
     {
+        $this->beConstructedWith(self::MONDAY);
         $this->shouldHaveType('SCL\DatesAndTimes\Day');
     }
 
@@ -34,11 +34,32 @@ class DaySpec extends ObjectBehavior
 
     function it_recognises_same_days()
     {
-        $this->isSameDay(new Day('monday'))->shouldReturn(true);
+        $this->beConstructedWith(self::MONDAY);
+        $this->isSameDay(new Day(self::MONDAY))->shouldReturn(true);
     }
 
     function it_recognises_different_days()
     {
+        $this->beConstructedWith(self::MONDAY);
         $this->isSameDay(new Day('tuesday'))->shouldReturn(false);
     }
+
+    function it_knows_mondays_number()
+    {
+        $this->beConstructedWith(self::MONDAY);
+        $this->toNumber()->shouldReturn(1);
+    }
+
+    function it_knows_saturdays_number()
+    {
+        $this->beConstructedWith(self::SATURDAY);
+        $this->toNumber()->shouldReturn(6);
+    }
+
+    function it_knows_sundays_number()
+    {
+        $this->beConstructedWith(self::SUNDAY);
+        $this->toNumber()->shouldReturn(0);
+    }
+
 }

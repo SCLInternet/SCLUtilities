@@ -21,27 +21,31 @@ class Day
         $this->validate($day);
     }
 
-    /**
-     * @return string
-     */
+    /** @return string */
     public function __toString()
     {
         return $this->day;
     }
 
+    /** @return integer (0..6 = sun..sat) */
+    public function toNumber()
+    {
+        return $this->dayNumber;
+    }
+
+    /** @return boolean */
     public function isSameDay(Day $candidate)
     {
-        return (strcmp($this->__toString(), $candidate->__toString())) == 0;
+        return ( strcmp((string)$this, (string)$candidate) ) == 0;
     }
 
     /** @param string $day */
     private function validate($day)
     {
-        $position = 0;
         foreach (self::$validDays as $pos => $validDay) {
             if (strcmp($day, $validDay) == 0) {
                 $this->day = $day;
-                $this->dayNumber = $position;
+                $this->dayNumber = $pos;
                 return;
             }
         }
