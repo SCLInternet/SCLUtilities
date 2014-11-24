@@ -118,7 +118,7 @@ class SimpleTableBuilder
     }
 
     /**
-     * @param $name
+     * @param string $name
      *
      * @return string
      */
@@ -197,6 +197,10 @@ class SimpleTableBuilder
         $this->builder->panelEnd();
     }
 
+    /**
+     * @param string $title
+     * @param array $rows
+     */
     public function buildInnerTable($title, array $rows)
     {
         $this->innerTableStart($title);
