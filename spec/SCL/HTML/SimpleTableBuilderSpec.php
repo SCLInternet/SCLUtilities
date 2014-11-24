@@ -10,7 +10,7 @@ use SCL\PHPSpec\Matchers;
 
 class SimpleTableBuilderSpec extends ObjectBehavior
 {
-
+    /** @var  HTMLBuilder */
     private $HTMLBuilder;
 
     public function let()
@@ -162,47 +162,6 @@ class SimpleTableBuilderSpec extends ObjectBehavior
         );
     }
 
-    //public function it_builds_a_table_within_a_table()
-    //{
-    //    $this->setPresenter(new Presenter($this->HTMLBuilder, $this));
-    //
-    //    $this->buildText(
-    //        "Title",
-    //        [
-    //            ["Greetings" => "Hello", "Name" => [["Forename" => "Steff", "Surname" => "Spicer"]]],
-    //            ["Greetings" => "Bore da", "Name" => "Rob"]
-    //        ]
-    //    )->shouldContain(
-    //        [
-    //            '<table class="table table-hover table-condensed" title="Title">',
-    //            '   <tr>',
-    //            '      <th>Greetings</th>',
-    //            '      <th>Name</th>',
-    //            '   </tr>',
-    //            '   <tr>',
-    //            '      <td>Hello</td>',
-    //            '      <td>',
-    //            '        <table class="table table-condensed" title="">',
-    //            '            <tr>',
-    //            '                <th>Forename</th>',
-    //            '                <th>Surname</th>',
-    //            '            </tr>',
-    //            '            <tr>',
-    //            '               <td>Steff</td>',
-    //            '               <td>Spicer</td>',
-    //            '            </tr>',
-    //            '        </table>',
-    //            '      </td>',
-    //            '   </tr>',
-    //            '   <tr>',
-    //            '      <td>Bore da</td>',
-    //            '      <td>Rob</td>',
-    //            '   </tr>',
-    //            '</table>'
-    //        ]
-    //    );
-    //}
-
     public function getMatchers()
     {
         return [
@@ -212,43 +171,6 @@ class SimpleTableBuilderSpec extends ObjectBehavior
     }
 }
 
-//class Presenter implements CustomDataPresenter
-//{
-//    /** @var SimpleTableBuilder */
-//    private $tableBuilder;
-//
-//    /** @var HTMLBuilder */
-//    private $builder;
-//
-//    public function __construct(HTMLBuilder $builder, SimpleTableBuilder $tableBuilder)
-//    {
-//        $this->tableBuilder = $tableBuilder;
-//        $this->builder = $builder;
-//    }
-//
-//    /**
-//     * @param mixed  $value
-//     * @param string $name
-//     *
-//     * @return bool (true if the data was handled)
-//     */
-//    public function transformData(HTMLBuilder $builder, SimpleTableBuilder $tableBuilder, $value, $name)
-//    {
-//        if (is_array($value)) {
-//            $this->buildArray($value);
-//        }
-//
-//        return true ;
-//    }
-//
-//    private function buildArray(
-//        $value
-//    ) {
-//        $this->builder->pushTag('td', []);
-//        $this->tableBuilder->buildInnerTable('', $value);
-//        $this->builder->popTag('td');
-//    }
-//}
 class FieldPrettifier extends NamePrettifier
 {
     public function __construct()
