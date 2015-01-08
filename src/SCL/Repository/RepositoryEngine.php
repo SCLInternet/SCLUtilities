@@ -193,11 +193,16 @@ trait RepositoryEngine
     /** @return array[] */
     protected function buildMongoQuery(VisitableSpecification $specification)
     {
-        $visitor = new BMMongoVisitor();
+        $visitor = $this->createVisitor();
         $specification->accept($visitor);
         $query = $visitor->getQuery();
         $extra = $visitor->getExtraSpecifications();
 
         return array($query, $extra);
     }
+
+    /**
+     * @return MongoVisitor
+     */
+    abstract protected function createVisitor();
 }
