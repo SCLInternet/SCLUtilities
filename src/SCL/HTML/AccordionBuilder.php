@@ -4,7 +4,7 @@ namespace SCL\HTML;
 
 class AccordionBuilder extends SimpleTableBuilder
 {
-    public function build($title, $rows)
+    public function build($title, array $rows)
     {
         $convertRows = $this->convertRows($rows);
         if (count($convertRows) == 0) {
