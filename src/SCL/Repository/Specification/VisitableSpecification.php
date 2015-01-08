@@ -18,7 +18,7 @@ class VisitableSpecification extends Specification
      */
     private function makeVisitMethodName($className)
     {
-        return 'visit' . str_replace('\\', '', str_replace(self::$namespace . '\\', '', $className));
+        return 'visit' . str_replace('\\', '', preg_replace('!^.*\\\\Specification\\\\(.*)$!', '\1', $className));
     }
 
     /**
