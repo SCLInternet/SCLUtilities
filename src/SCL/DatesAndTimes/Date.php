@@ -25,7 +25,7 @@ class Date
             throw InvalidStringFormatException::invalidFormat('Date', 'YYYY-MM-DD', $string);
         }
 
-        return new self(new Year($matches[1]), new Month($matches[2]), $matches[3]);
+        return new static(new Year($matches[1]), new Month($matches[2]), $matches[3]);
     }
 
     /**
@@ -35,11 +35,11 @@ class Date
      */
     public function __construct(Year $year, Month $month, $day)
     {
-        $this->day   = (int) $day;
+        $this->day   = (int)$day;
         $this->month = $month;
         $this->year  = $year;
 
-        if ((string) $this !== $this->getPhpDateTime()->format('Y-m-d')) {
+        if ((string)$this !== $this->getPhpDateTime()->format('Y-m-d')) {
             throw InvalidDateException::invalidDate(
                 $this->year->getValue(),
                 $this->month->getValue(),
@@ -71,7 +71,7 @@ class Date
     {
         $diff = $that->getPhpDateTime()->diff($this->getPhpDateTime());
 
-        return (bool) $diff->invert;
+        return (bool)$diff->invert;
     }
 
     /** @return boolean */
@@ -79,7 +79,7 @@ class Date
     {
         $diff = $this->getPhpDateTime()->diff($that->getPhpDateTime());
 
-        return (bool) !$diff->invert;
+        return (bool)!$diff->invert;
     }
 
     /** @return boolean */
@@ -87,7 +87,7 @@ class Date
     {
         $diff = $this->getPhpDateTime()->diff($that->getPhpDateTime());
 
-        return (bool) $diff->invert;
+        return (bool)$diff->invert;
     }
 
     /** @return boolean */
@@ -95,7 +95,7 @@ class Date
     {
         $diff = $that->getPhpDateTime()->diff($this->getPhpDateTime());
 
-        return (bool) !$diff->invert;
+        return (bool)!$diff->invert;
     }
 
     public function __toString()
@@ -131,7 +131,7 @@ class Date
     /** @return DateTimeImmutable */
     protected function getPhpDateTime()
     {
-        return new DateTimeImmutable((string) $this);
+        return new DateTimeImmutable((string)$this);
     }
 
     /**
@@ -151,9 +151,27 @@ class Date
         return $this->getPhpDateTime() == $other->getPhpDateTime();
     }
 
-
     public function formatted($format)
     {
         return $this->getPhpDateTime()->format($format);
+    }
+
+    /** @return int */
+    public function daysUntil(self $date)
+    {
+        $dateInterval = $this->getPhpDateTime()->diff($date->getPhpDateTime());
+
+        return ($dateInterval->invert ? -1 : 1) * $dateInterval->days;
+    }
+
+    /** @return array */
+    public function weeksUntil(self $date)
+    {
+        $days = $this->daysUntil($date);
+        $sign = $days < 0 ? -1 : 1;
+
+        $weeks = (int)floor(abs($days) / 7);
+
+        return [$sign * $weeks, $sign * ((int)abs($days) - 7 * $weeks)];
     }
 }

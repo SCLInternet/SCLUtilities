@@ -8,6 +8,7 @@ use SCL\DatesAndTimes\Date;
 use SCL\DatesAndTimes\Month;
 use SCL\DatesAndTimes\Year;
 use PhpSpec\ObjectBehavior;
+use SCL\PHPSpec\Matchers;
 
 class DateSpec extends ObjectBehavior
 {
@@ -146,5 +147,30 @@ class DateSpec extends ObjectBehavior
         $this->beSetupWithDate(2014, 10, 31);
         $this->formatted('Y-n-j')->shouldReturn('2014-10-31');
         $this->formatted('l, jS F Y')->shouldReturn('Friday, 31st October 2014');
+    }
+
+    public function it_counts_days_until_date()
+    {
+        $this->beConstructedThrough('fromString', ['2015-01-01']);
+        $this->daysUntil(Date::fromString('2015-01-01'))->shouldReturn(0);
+        $this->daysUntil(Date::fromString('2015-01-02'))->shouldReturn(1);
+        $this->daysUntil(Date::fromString('2016-02-02'))->shouldReturn(397);
+        $this->daysUntil(Date::fromString('2014-12-31'))->shouldReturn(-1);
+    }
+
+    public function it_counts_weeks_until_date()
+    {
+        $this->beConstructedThrough('fromString', ['2015-01-01']);
+        $this->weeksUntil(Date::fromString('2015-01-01'))->shouldReturnArray([0, 0]);
+        $this->weeksUntil(Date::fromString('2015-01-08'))->shouldReturnArray([1, 0]);
+        $this->weeksUntil(Date::fromString('2015-01-09'))->shouldReturnArray([1, 1]);
+        $this->weeksUntil(Date::fromString('2014-12-25'))->shouldReturnArray([-1, 0]);
+        $this->weeksUntil(Date::fromString('2014-12-26'))->shouldReturnArray([0, -6]);
+        $this->weeksUntil(Date::fromString('2014-12-24'))->shouldReturnArray([-1, -1]);
+    }
+
+    public function getMatchers()
+    {
+        return ['returnArray' => Matchers::returnArray()];
     }
 }
