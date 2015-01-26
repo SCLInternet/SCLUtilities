@@ -127,6 +127,14 @@ class DateSpec extends ObjectBehavior
         $this->shouldBeSameAs($this);
     }
 
+    public function it_returns_a_subclass_instance_from_modify()
+    {
+        $this->beAnInstanceOf('spec\SCL\DatesAndTimes\DateSubclass');
+        $this->beSetupWithDate(2014, 01, 01);
+
+        $this->modify('today')->shouldReturnAnInstanceOf('spec\SCL\DatesAndTimes\DateSubclass');
+    }
+
     private function keepPhpSpecHappyForStaticCalls()
     {
         $this->beSetupWithDate(2000, 01, 01);
@@ -173,4 +181,8 @@ class DateSpec extends ObjectBehavior
     {
         return ['returnArray' => Matchers::returnArray()];
     }
+}
+
+class DateSubclass extends Date
+{
 }
