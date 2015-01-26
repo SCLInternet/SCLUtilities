@@ -143,7 +143,7 @@ class Date
     {
         $yesterday = $this->getPhpDateTime()->modify($modifier);
 
-        return Date::fromString($yesterday->format('Y-m-d'));
+        return static::fromString($yesterday->format('Y-m-d'));
     }
 
     public function isSameAs(self $other)
