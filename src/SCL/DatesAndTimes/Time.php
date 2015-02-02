@@ -75,14 +75,29 @@ class Time
 
     public function isLaterThan(Time $time)
     {
-        if ($this->getHour() > $time->getHour()) return true;
-        if ($this->getHour() < $time->getHour()) return false;
+        if ($this->getHour() > $time->getHour()) {
+            return true;
+        }
 
-        if ($this->getMinute() > $time->getMinute()) return true;
-        if ($this->getMinute() < $time->getMinute()) return false;
+        if ($this->getHour() < $time->getHour()) {
+            return false;
+        }
 
-        if ($this->getSecond() > $time->getSecond()) return true;
-        if ($this->getSecond() < $time->getSecond()) return false;
+        if ($this->getMinute() > $time->getMinute()) {
+            return true;
+        }
+
+        if ($this->getMinute() < $time->getMinute()) {
+            return false;
+        }
+
+        if ($this->getSecond() > $time->getSecond()) {
+            return true;
+        }
+
+        if ($this->getSecond() < $time->getSecond()) {
+            return false;
+        }
 
         return false;
     }
