@@ -32,7 +32,6 @@ class HTMLBuilderSpec extends ObjectBehavior
         $this->setStringCleaner(function ($value) use ($cleaner) {
             $cleaner->getWrappedObject()->cleanString($value);
         });
-        $cleaner->cleanString(Argument::any())->willReturn();
         $cleaner->cleanString('text to be cleaned')->shouldBeCalled();
         $cleaner->cleanString('other text')->shouldBeCalled();
         $this->inlineTag('tag', [], 'text to be cleaned');
