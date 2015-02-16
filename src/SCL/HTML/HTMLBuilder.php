@@ -8,6 +8,9 @@ class HTMLBuilder
 {
     const INDENT = 3;
 
+    /** @var callable (function (string $str) : string) */
+    private $stringCleaner;
+
     /** @var string[] */
     protected $stack = [];
 
@@ -71,7 +74,7 @@ class HTMLBuilder
      */
     public function append($str)
     {
-        $this->result[] = str_repeat(' ', self::INDENT * $this->level) . $str;
+        $this->result[] = str_repeat(' ', self::INDENT * $this->level) . $this->cleanup($str);
     }
 
     public function endTag($name)
@@ -109,7 +112,7 @@ class HTMLBuilder
                 '%s%s%s',
                 [
                     $this->startTag($tagName, $params, $extra),
-                    $text,
+                    $this->cleanup($text),
                     $this->endTag($tagName)
                 ]
             )
@@ -125,5 +128,19 @@ class HTMLBuilder
 
     public function panelEnd()
     {
+    }
+
+    public function setStringCleaner(callable $cleaner)
+    {
+        $this->stringCleaner = $cleaner;
+    }
+
+    private function cleanup($value)
+    {
+        if (!$this->stringCleaner) {
+            return $value;
+        }
+        $cleaner = $this->stringCleaner;
+        return $cleaner($value);
     }
 }
