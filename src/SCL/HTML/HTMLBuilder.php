@@ -42,12 +42,12 @@ class HTMLBuilder
             throw MismatchedTagException::wrongTag($expectedTagName, $tagName);
         }
         $this->outdent();
-        $this->appendStr($this->endTag($tagName));
+        $this->appendRawStr($this->endTag($tagName));
     }
 
     public function pushTag($name, array $params, $extra = null)
     {
-        $this->appendStr($this->startTag($name, $params, $extra));
+        $this->appendRawStr($this->startTag($name, $params, $extra));
         $this->indent();
         array_push($this->stack, $name);
     }
@@ -59,7 +59,7 @@ class HTMLBuilder
      */
     public function appendTag($name, array $params, $extra = null)
     {
-        $this->appendStr($this->startTag($name, $params, $extra));
+        $this->appendRawStr($this->startTag($name, $params, $extra));
     }
 
     public function outdent()
@@ -77,7 +77,7 @@ class HTMLBuilder
         $this->result[] = str_repeat(' ', self::INDENT * $this->level) . $this->cleanup($str);
     }
 
-    private function appendStr($str)
+    public function appendRawStr($str)
     {
         $this->result[] = str_repeat(' ', self::INDENT * $this->level) . $str;
     }
@@ -112,7 +112,7 @@ class HTMLBuilder
 
     public function inlineTag($tagName, array $params, $text, $extra = null)
     {
-        $this->appendStr(
+        $this->appendRawStr(
             vsprintf(
                 '%s%s%s',
                 [
