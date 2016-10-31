@@ -53,6 +53,7 @@ class Collection
 
             return $a['_id'];
         } catch (\MongoException $e) {
+            echo "OOOOOOOPS";
             var_dump($a);
             throw $e;
         }
