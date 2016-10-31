@@ -2,12 +2,14 @@
 
 namespace SCL\Repository;
 
+use SCL\Repository\Value\RealIdentity;
+use SCL\Repository\Value\Identity;
+use SCL\Repository\Value\NullIdentity;
 use MongoId;
 use SCL\Repository\Exception\NoSuchEntityException;
 use SCL\Repository\Specification\Specification;
 use SCL\Repository\Specification\VisitableSpecification;
 use SCL\Repository\Value\Identifiable;
-use SCL\Repository\Value\Identity;
 
 trait RepositoryEngine
 {
@@ -32,9 +34,9 @@ trait RepositoryEngine
     }
 
     /** @return object[] */
-    public function loadBySpecification(Specification $specification)
+    public function loadBySpecification(Specification $specification, $debug=false)
     {
-        return $this->loadBySpecificationWithQuery($specification, []);
+        return $this->loadBySpecificationWithQuery($specification, [], $debug);
     }
 
     /**
@@ -85,33 +87,38 @@ trait RepositoryEngine
     }
 
     /** @return object[] */
-    protected function loadBySpecificationWithQuery(Specification $specification, array $query)
+    protected function loadBySpecificationWithQuery(Specification $specification, array $query, $debug = false)
     {
+//        echo "Debug is " . ($debug ? 'true' : 'false') . "\n";
         $results = null;
         if (!($specification instanceof VisitableSpecification)) {
+            echo get_class($specification) . " is not visitable \n";
             return $this->filterResultsBySpecification($this->loadMany($query), $specification);
         }
 
         list($baseQuery, $extra) = $this->buildMongoQuery($specification);
-        if (count($query)) {
-            $query['query'] = $baseQuery;
+        if (count($query) > 0) {
+            $query['$query'] = $baseQuery;
         } else {
             $query = $baseQuery;
         }
+        if ($debug) {
+            var_dump($query);
+            var_dump($extra);
+        }
         $results = $this->loadMany($query);
-
         if (!$extra) {
             return $results;
         }
 
         return $this->filterResultsBySpecification($results, $extra);
-
     }
 
     protected function applyStore($entity)
     {
         try {
-            if ($entity->getId()) {
+            $id = $entity->getId();
+            if ($id && !($id instanceof NullIdentity)) {
                 $this->update($entity);
             } else {
                 $this->insert($entity);
@@ -122,7 +129,7 @@ trait RepositoryEngine
         }
     }
 
-    protected function insert($entity)
+    protected function insert(Identifiable $entity)
     {
         $document = $entity->flatten()->asArray();
 
@@ -132,7 +139,7 @@ trait RepositoryEngine
 
         $ident = $this->collection->insert($document);
 
-        $entity->setId(new Identity($ident));
+        $entity->setId(new RealIdentity($ident));
     }
 
     protected function update($entity)
@@ -153,7 +160,8 @@ trait RepositoryEngine
     protected function loadMany($query)
     {
         $entities = [];
-        foreach ($this->collection->find($query) as $document) {
+        $cursor = $this->collection->find($query);
+        foreach ($cursor as $document) {
             $entities[] = $this->buildEntity($document);
         }
 
