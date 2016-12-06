@@ -319,4 +319,9 @@ class Period
         return $period->getStart()->isBefore($this->getStart())
         && $period->getEnd()->isBeforeOrSameAs($this->getEnd());
     }
+
+    public function getLength()
+    {
+        return $this->start->daysUntil($this->end);
+    }
 }
