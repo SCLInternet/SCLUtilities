@@ -5,7 +5,7 @@ namespace spec\SCL\Repository\Value;
 use PhpSpec\ObjectBehavior;
 use SCL\Repository\Exception\EmptyIdentityException;
 
-class IdentitySpec extends ObjectBehavior
+class RealIdentitySpec extends ObjectBehavior
 {
     public function let()
     {

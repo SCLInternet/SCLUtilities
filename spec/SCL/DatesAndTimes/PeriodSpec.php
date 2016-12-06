@@ -31,6 +31,16 @@ class PeriodSpec extends ObjectBehavior
         $this->getEnd()->shouldReturn($end);
     }
 
+    public function it_has_the_right_length()
+    {
+        $start = Date::fromString('2014-05-15');
+        $end   = Date::fromString('2014-05-16');
+
+        $this->beConstructedWith($start, $end);
+
+        $this->getLength()->shouldReturn(1);
+    }
+
     public function it_converts_to_string()
     {
         $start = Date::fromString('2014-05-15');

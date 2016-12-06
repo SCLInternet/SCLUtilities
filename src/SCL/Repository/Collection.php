@@ -59,6 +59,7 @@ class Collection
         }
     }
 
+    /** bool|array */
     public function update(array $criteria, array $new, array $options = [])
     {
         return $this->collection->update($criteria, $new, $options);
