@@ -7,4 +7,6 @@ interface Identity
     public function getValue();
 
     public function __toString();
+
+    public function isSameAs(Identity $other);
 }

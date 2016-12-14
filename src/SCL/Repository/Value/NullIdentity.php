@@ -20,4 +20,9 @@ final class NullIdentity implements Identity
     {
         return '';
     }
+
+    public function isSameAs(Identity $other)
+    {
+        return false;
+    }
 }
