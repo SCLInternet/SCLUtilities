@@ -139,7 +139,7 @@ trait RepositoryEngine
 
         $ident = $this->collection->insert($document);
 
-        $entity->setId(new RealIdentity($ident));
+        $entity->setId(new RealIdentity((string)$ident));
     }
 
     protected function update($entity)

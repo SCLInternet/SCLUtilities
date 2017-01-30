@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 
 namespace SCL\Repository\Value;
 
@@ -10,10 +11,10 @@ final class NullIdentity implements Identity
     {
     }
 
-    /** @return string */
-    public function getValue()
+    public function getValue() : string
     {
-        throw NullIdentityException::methodCall('getValue');
+        return '';
+//        throw NullIdentityException::methodCall('getValue');
     }
 
     public function __toString()

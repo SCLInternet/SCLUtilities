@@ -1,10 +1,11 @@
 <?php
+declare(strict_types = 1);
+
 namespace SCL\Repository\Value;
 
 interface Identity
 {
-    /** @return string */
-    public function getValue();
+    public function getValue() : string;
 
     public function __toString();
 

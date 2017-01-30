@@ -212,7 +212,7 @@ class Period
         && $date->isBeforeOrSameAs($this->end);
     }
 
-    private function exactlyMatches(Period $period)
+    public function exactlyMatches(Period $period)
     {
         return $this->getStart()->isSameAs($period->getStart()) && $this->getEnd()->isSameAs($period->getEnd());
     }
