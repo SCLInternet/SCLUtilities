@@ -47,7 +47,7 @@ trait RepositoryEngine
     public function loadOneBySpecification(Specification $specification, $debug=false)
     {
         // @todo maybe should be a version that doesn't throw
-        $entities = $this->loadBySpecification($specification, $debug);
+        $entities = $this->loadBySpecificationWithQuery($specification, [], $debug);
 
         if (empty($entities)) {
             throw new NoSuchEntityException();
