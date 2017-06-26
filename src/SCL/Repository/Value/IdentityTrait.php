@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 
 namespace SCL\Repository\Value;
 
@@ -10,7 +11,7 @@ trait IdentityTrait
     private $id;
 
     /** @param string $id */
-    public function __construct($id)
+    public function __construct(string $id)
     {
         if (!$id) {
             throw EmptyIdentityException::emptyIdentity();
@@ -18,8 +19,7 @@ trait IdentityTrait
         $this->id = (string)$id;
     }
 
-    /** @return string */
-    public function getValue()
+    public function getValue() : string
     {
         return $this->id;
     }

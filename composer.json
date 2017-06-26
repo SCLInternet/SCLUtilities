@@ -3,7 +3,7 @@
     "description" : "Handy classes, e.g. dates, times etc.",
     "type" : "library",
     "license": "MIT",
-    "version": "1.0.16",
+    "version": "1.0.17",
     "authors": [
         {
             "name": "Rob Heyes",
