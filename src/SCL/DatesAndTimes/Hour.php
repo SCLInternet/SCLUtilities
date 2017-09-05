@@ -14,7 +14,7 @@ class Hour
         if ($hour > 23) {
             throw InvalidHourException::hourOutOfRange($hour);
         }
-        $this->hour = (int) $hour;
+        $this->hour = $hour;
     }
 
     public function getValue()
